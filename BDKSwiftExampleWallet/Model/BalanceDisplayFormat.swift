@@ -23,6 +23,25 @@ enum BalanceDisplayFormat: String, CaseIterable, Codable {
         case .fiat: return "USD"
         }
     }
+    
+    func formatted(_ value: UInt64) -> String {
+        switch self {
+        case .sats:
+            return value.formatted(.number)
+        case .bitcoin:
+            return String(format: "%.8f", Double(value) / 100_000_000)
+        case .bitcoinSats:
+            return value.formattedSatoshis()
+        case .bip21q:
+            return value.formatted(.number)
+        case .fiat:
+            return ""
+//            return satsPrice.formatted(.number.precision(.fractionLength(2)))
+        case .bip177:
+            return value.formattedBip177()
+        }
+    }
+        
 }
 
 extension BalanceDisplayFormat {

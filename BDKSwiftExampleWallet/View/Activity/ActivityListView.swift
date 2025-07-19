@@ -26,7 +26,8 @@ struct ActivityListView: View {
                     TransactionListView(
                         viewModel: .init(),
                         transactions: viewModel.transactions,
-                        walletSyncState: viewModel.walletSyncState
+                        walletSyncState: viewModel.walletSyncState,
+                        format: .bip177
                     )
                     .transition(.blurReplace)
                 } else {

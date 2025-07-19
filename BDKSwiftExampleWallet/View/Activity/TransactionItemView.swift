@@ -13,6 +13,17 @@ struct TransactionItemView: View {
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
     let txDetails: TxDetails
     let isRedacted: Bool
+    private let format: BalanceDisplayFormat
+    
+    init(
+        txDetails: TxDetails,
+        isRedacted: Bool,
+        format: BalanceDisplayFormat
+    ) {
+        self.txDetails = txDetails
+        self.isRedacted = isRedacted
+        self.format = format
+    }
 
     var body: some View {
 
@@ -120,7 +131,8 @@ struct TransactionItemView: View {
     #Preview {
         TransactionItemView(
             txDetails: .mock,
-            isRedacted: false
+            isRedacted: false,
+            format: .bip177
         )
     }
 #endif

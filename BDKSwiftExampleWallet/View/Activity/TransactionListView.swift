@@ -13,14 +13,28 @@ struct TransactionListView: View {
     @Bindable var viewModel: TransactionListViewModel
     let transactions: [CanonicalTx]
     let walletSyncState: WalletSyncState
+    private let format: BalanceDisplayFormat
 
+    init(
+        viewModel: TransactionListViewModel,
+        transactions: [CanonicalTx],
+        walletSyncState: WalletSyncState,
+        format: BalanceDisplayFormat
+    ) {
+        self.viewModel = viewModel
+        self.transactions = transactions
+        self.walletSyncState = walletSyncState
+        self.format = format
+    }
+    
     var body: some View {
 
         List {
             if transactions.isEmpty && walletSyncState == .syncing {
                 TransactionItemView(
                     txDetails: .mock,
-                    isRedacted: true
+                    isRedacted: true,
+                    format: format
                 )
                 .listRowInsets(EdgeInsets())
                 .listRowSeparator(.hidden)
@@ -102,7 +116,8 @@ struct TransactionListView: View {
                         ) {
                             TransactionItemView(
                                 txDetails: txDetails,
-                                isRedacted: false
+                                isRedacted: false,
+                                format: format
                             )
                         }
 
@@ -142,7 +157,8 @@ struct TransactionListView: View {
             transactions: [
                 .mock
             ],
-            walletSyncState: .synced
+            walletSyncState: .synced,
+            format: .bip177
         )
     }
     #Preview {
@@ -151,7 +167,8 @@ struct TransactionListView: View {
                 bdkClient: .mock
             ),
             transactions: [],
-            walletSyncState: .synced
+            walletSyncState: .synced,
+            format: .bip177
         )
     }
 #endif

@@ -55,7 +55,8 @@ struct WalletView: View {
                     TransactionListView(
                         viewModel: .init(),
                         transactions: viewModel.recentTransactions,
-                        walletSyncState: viewModel.walletSyncState
+                        walletSyncState: viewModel.walletSyncState,
+                        format: balanceFormat
                     )
                     .refreshable {
                         await viewModel.syncOrFullScan()

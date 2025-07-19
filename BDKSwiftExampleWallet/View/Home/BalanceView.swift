@@ -37,20 +37,21 @@ struct BalanceView: View {
 
     @MainActor
     private var formattedBalance: String {
-        switch format {
-        case .sats:
-            return balance.formatted(.number)
-        case .bitcoin:
-            return String(format: "%.8f", Double(balance) / 100_000_000)
-        case .bitcoinSats:
-            return balance.formattedSatoshis()
-        case .bip21q:
-            return balance.formatted(.number)
-        case .fiat:
-            return satsPrice.formatted(.number.precision(.fractionLength(2)))
-        case .bip177:
-            return balance.formattedBip177()
-        }
+        return format.formatted(balance)
+//        switch format {
+//        case .sats:
+//            return balance.formatted(.number)
+//        case .bitcoin:
+//            return String(format: "%.8f", Double(balance) / 100_000_000)
+//        case .bitcoinSats:
+//            return balance.formattedSatoshis()
+//        case .bip21q:
+//            return balance.formatted(.number)
+//        case .fiat:
+//            return satsPrice.formatted(.number.precision(.fractionLength(2)))
+//        case .bip177:
+//            return balance.formattedBip177()
+//        }
     }
 
     @MainActor
